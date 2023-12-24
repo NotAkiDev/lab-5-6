@@ -4,7 +4,6 @@ using namespace std;
 
 
 class Flat {
-
 private:
     int Rooms = 0;
     int SquareCount = 0;
@@ -16,10 +15,11 @@ private:
     inline static Flat **arr = {};
 
 public:
-
     Flat();
 
     Flat(int Rooms, int SquareCount, int CostPerMeter, int PeopleLive, int Floor);
+
+    Flat(const Flat &other);
 
     ~Flat(){};
 
@@ -39,9 +39,7 @@ public:
 
     void SortByPrice();
 
-    Flat(const Flat &other);
 };
-
 
 Flat::Flat() {
     ++counter;
@@ -158,7 +156,7 @@ void Flat::SortByPrice() {
         }
     }
 
-    float arr_data[count];
+    float *arr_data = new float[count];
 
     for (int i = 0; i < counter; ++i) {
         pointer = arr[i];
@@ -175,6 +173,7 @@ void Flat::SortByPrice() {
     for (int i = 0; i < counter_info; i++){
         cout << arr_data[i] << endl;
     }
+    delete []arr_data;
 };
 
 int main() {
@@ -192,8 +191,6 @@ int main() {
     cout << flat1.AllAverageCost(15) << endl; // Вывод средней цены на квартиры больше 15 кв. м
 
     flat3.SortByPrice(); // Цены квартир по-возрастанию на человека
-
-
 
     return 0;
 }
